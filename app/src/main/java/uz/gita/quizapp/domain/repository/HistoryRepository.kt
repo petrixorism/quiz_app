@@ -7,7 +7,7 @@ import uz.gita.quizapp.data.model.MainResponse
 
 interface HistoryRepository {
 
-    fun getAllHistory(history: HistoryData) :Flow<MainResponse<List<HistoryData>>>
+    fun getAllHistory() :Flow<MainResponse<List<HistoryData>>>
 
     fun insertHistory(history: HistoryData) :Flow<MainResponse<Unit>>
 

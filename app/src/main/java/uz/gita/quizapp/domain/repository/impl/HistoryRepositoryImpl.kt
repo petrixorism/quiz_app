@@ -16,7 +16,7 @@ import javax.inject.Inject
 class HistoryRepositoryImpl @Inject constructor(
     private val fireStore: DocumentReference
 ) : HistoryRepository {
-    override fun getAllHistory(history: HistoryData) =
+    override fun getAllHistory() =
         callbackFlow<MainResponse<List<HistoryData>>> {
             val ref = fireStore.collection("history")
 

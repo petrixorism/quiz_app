@@ -28,13 +28,13 @@ class HistoryAdapter : ListAdapter<HistoryData, HistoryAdapter.ViewHolder>(MyDif
         @SuppressLint("SetTextI18n")
         fun bind() {
             getItem(absoluteAdapterPosition).apply {
+                val solution = String.format("%.2f", this.duration)
                 itemBinding.categoryTv.text = this.category
                 itemBinding.nameTv.text = this.name
                 itemBinding.resultTv.text = this.result
-                itemBinding.durationTv.text = this.duration.toString()
+                itemBinding.durationTv.text = "$solution minut"
             }
         }
-
     }
 
     object MyDiffUtil : DiffUtil.ItemCallback<HistoryData>() {
