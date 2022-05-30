@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_category"
+        android:title="Mavzular" />
+    <item
+        android:id="@+id/historyFragment"
+        android:icon="@drawable/ic__top_user"
+        android:title="Tarix" />
+    <item
+        android:id="@+id/addTestFragment"
+        android:icon="@drawable/ic_add"
+        android:title="Test qo'shish" />
+
+</menu>

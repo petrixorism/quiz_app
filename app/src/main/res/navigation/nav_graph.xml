@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="uz.gita.quizapp.presentation.ui.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_testFragment"
+            app:destination="@id/testFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTestFragment"
+        android:name="uz.gita.quizapp.presentation.ui.AddTestFragment"
+        android:label="AddTestFragment"
+        tools:layout="@layout/fragment_add_test" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="uz.gita.quizapp.presentation.ui.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="uz.gita.quizapp.presentation.ui.TestFragment"
+        android:label="TestFragment"
+        tools:layout="@layout/fragment_test" >
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_testFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph.xml"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
