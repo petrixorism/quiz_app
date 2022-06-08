@@ -3,19 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
+    style="@style/DialogStyle"
     android:layout_height="wrap_content"
-    android:background="#00000000">
+    android:background="@drawable/background_et_brown">
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/background_et_brown"
-        android:paddingBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name_tv"

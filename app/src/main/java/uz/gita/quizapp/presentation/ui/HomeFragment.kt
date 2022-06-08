@@ -2,6 +2,8 @@ package uz.gita.quizapp.presentation.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -62,10 +64,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showDialog() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.background_et_brown_dialog);
         dialog.setContentView(R.layout.dialog_username)
 
 
@@ -75,6 +79,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 showToast("Ism kiritilmadi")
             } else {
                 viewModel.setUserName(nameEt.text.toString())
+                binding.textView2.text = "\uD83D\uDC4B\uD83C\uDFFB  Salom ${SharedPref.getInstance().name}"
                 dialog.dismiss()
             }
         }

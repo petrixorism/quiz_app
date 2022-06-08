@@ -1,10 +1,6 @@
 package uz.gita.quizapp.domain.repository.impl
 
-import android.util.Log
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
@@ -22,7 +18,6 @@ class TestRepositoryImpl @Inject constructor(
     private val fireStore: DocumentReference
 ) : TestRepository {
 
-    private val TAG = "QWERTY"
 
 
     override fun getCategoryNames() = callbackFlow<MainResponse<List<CategoryData>>> {

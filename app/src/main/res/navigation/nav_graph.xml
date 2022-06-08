@@ -9,7 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="uz.gita.quizapp.presentation.ui.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_testFragment"
             app:destination="@id/testFragment" />
@@ -18,7 +18,11 @@
         android:id="@+id/addTestFragment"
         android:name="uz.gita.quizapp.presentation.ui.AddTestFragment"
         android:label="AddTestFragment"
-        tools:layout="@layout/fragment_add_test" />
+        tools:layout="@layout/fragment_add_test">
+        <action
+            android:id="@+id/action_addTestFragment_to_editFragment"
+            app:destination="@id/editFragment" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="uz.gita.quizapp.presentation.ui.HistoryFragment"
@@ -28,7 +32,7 @@
         android:id="@+id/testFragment"
         android:name="uz.gita.quizapp.presentation.ui.TestFragment"
         android:label="TestFragment"
-        tools:layout="@layout/fragment_test" >
+        tools:layout="@layout/fragment_test">
         <argument
             android:name="category"
             app:argType="string" />
@@ -37,5 +41,15 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/nav_graph.xml"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editFragment"
+
+        android:name="uz.gita.quizapp.presentation.ui.EditFragment"
+        android:label="EditFragment"
+        tools:layout="@layout/fragment_edit">
+        <argument
+            android:name="category"
+            app:argType="string" />
     </fragment>
 </navigation>

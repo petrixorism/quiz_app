@@ -2,6 +2,8 @@ package uz.gita.quizapp.presentation.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -19,6 +21,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import uz.gita.quizapp.R
+import uz.gita.quizapp.data.SharedPref
 import uz.gita.quizapp.data.model.HistoryData
 import uz.gita.quizapp.data.model.TestData
 import uz.gita.quizapp.databinding.DialogEndBinding
@@ -167,14 +170,15 @@ class TestFragment : Fragment(R.layout.fragment_test) {
     @SuppressLint("SetTextI18n")
     private fun showDialog(result: String) {
         val dialog = Dialog(requireContext())
+        dialog.window?.setBackgroundDrawableResource(R.drawable.background_et_brown_dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.dialog_end)
 
 
-        val resultTime = (System.currentTimeMillis() - time) / 1000.0 / 60.0
+        val resultTime = (System.currentTimeMillis() - time)
 
-        dialog.findViewById<TextView>(R.id.result_time_tv).text = resultTime.toString() + " minut"
+        dialog.findViewById<TextView>(R.id.result_time_tv).text = "$resultTime minut"
         dialog.findViewById<TextView>(R.id.result_count_tv).text = result
         dialog.findViewById<Button>(R.id.menu_btn).setOnClickListener {
             findNavController().navigate(TestFragmentDirections.actionTestFragmentToHomeFragment())
@@ -183,7 +187,7 @@ class TestFragment : Fragment(R.layout.fragment_test) {
 
         viewModel.finishTest(
             HistoryData(
-                "Ravshan", args.category, result, duration = resultTime
+                SharedPref.getInstance().name, args.category, result, duration = resultTime + 0.0
             )
         )
         dialog.show()

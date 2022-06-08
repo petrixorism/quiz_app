@@ -77,7 +77,7 @@
                 android:layout_marginBottom="18dp"
                 android:background="@drawable/background_et_brown"
                 android:fontFamily="@font/meta_pro_medium"
-                android:hint="#1 Variant"
+                android:hint="#1 Variant (to'g'ri javob)"
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:padding="16dp"
