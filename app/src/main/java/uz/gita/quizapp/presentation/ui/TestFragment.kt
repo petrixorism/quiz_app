@@ -57,6 +57,9 @@ class TestFragment : Fragment(R.layout.fragment_test) {
         viewModel.finishLiveData.observe(this) {
             findNavController().navigate(TestFragmentDirections.actionTestFragmentToHomeFragment())
         }
+        viewModel.backLiveData.observe(this) {
+            requireActivity().onBackPressed()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,6 +75,9 @@ class TestFragment : Fragment(R.layout.fragment_test) {
         viewModel.getQuestions(args.category)
 
         binding.title.text = args.category
+        binding.backBtn.setOnClickListener {
+            viewModel.back()
+        }
 
         binding.radioGroup.children.forEach {
             it.setOnClickListener {
@@ -178,7 +184,13 @@ class TestFragment : Fragment(R.layout.fragment_test) {
 
         val resultTime = (System.currentTimeMillis() - time)
 
-        dialog.findViewById<TextView>(R.id.result_time_tv).text = "$resultTime minut"
+        val duration = if (resultTime/1000 < 60) {
+            (resultTime / 1000).toString() + " sek"
+        } else {
+            "${(resultTime / 1000 / 60)} min ${(resultTime / 1000) % 60} sek"
+        }
+
+        dialog.findViewById<TextView>(R.id.result_time_tv).text = duration
         dialog.findViewById<TextView>(R.id.result_count_tv).text = result
         dialog.findViewById<Button>(R.id.menu_btn).setOnClickListener {
             findNavController().navigate(TestFragmentDirections.actionTestFragmentToHomeFragment())

@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
-    android:layout_height="wrap_content"
-  >
+    android:layout_height="wrap_content">
 
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/background_et_brown"
@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/text_title"
         android:layout_width="wrap_content"
@@ -38,9 +39,39 @@
         android:textColor="@color/brown"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_result"
         app:layout_constraintTop_toBottomOf="@id/text_title"
-        tools:text="Natija : 10/20" />
+        tools:text="10/20" />
+
+    <TextView
+        android:id="@+id/text_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/meta_pro_medium"
+        android:text="Natija : "
+        android:textColor="@color/brown"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/result_count_tv"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_title" />
+
+
+    <TextView
+        android:id="@+id/text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/meta_pro_medium"
+        android:text="Vaqt : "
+        android:textColor="@color/brown"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/result_time_tv"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/result_time_tv" />
 
 
     <TextView
@@ -52,20 +83,22 @@
         android:textColor="@color/brown"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/text_time"
         app:layout_constraintTop_toBottomOf="@id/result_count_tv"
-        tools:text="Vaqt : 1 min" />
+        tools:text="1 min" />
 
     <Button
         android:id="@+id/menu_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/green_button"
         android:fontFamily="@font/meta_pro_bold"
         android:paddingHorizontal="16dp"
         android:text="Bosh menu"
+        android:textSize="12sp"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

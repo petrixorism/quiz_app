@@ -24,7 +24,7 @@ class TestViewModelImpl @Inject constructor(
     override val finishLiveData = MutableLiveData<Unit>()
     override val failLiveData = MutableLiveData<String>()
     override val errorLiveData = MutableLiveData<String>()
-
+    override val backLiveData = MutableLiveData<Unit>()
 
 
     override fun finishTest(historyData: HistoryData) {
@@ -70,5 +70,9 @@ class TestViewModelImpl @Inject constructor(
             }
         }
 
+    }
+
+    override fun back() {
+        backLiveData.value = Unit
     }
 }

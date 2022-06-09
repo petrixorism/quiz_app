@@ -1,5 +1,6 @@
 package uz.gita.quizapp.presentation.viewmodel.impl
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,6 +24,7 @@ class TestEditViewModelImpl @Inject constructor(
     override val backLiveData = MutableLiveData<Unit>()
     override val editTestLiveData = MutableLiveData<Unit>()
     override val deleteLiveData = MutableLiveData<Unit>()
+    override val deleteCategoryLiveData = MutableLiveData<Unit>()
 
     override fun getTestsByCategory(category: String) {
         viewModelScope.launch {
@@ -79,6 +81,24 @@ class TestEditViewModelImpl @Inject constructor(
             }
         }
 
+    }
+
+    override fun deleteCategory(category: String) {
+        viewModelScope.launch {
+            repository.deleteCategory(category).collect {
+                when (it) {
+                    is MainResponse.Success -> {
+                        deleteCategoryLiveData.postValue(Unit)
+                    }
+                    is MainResponse.Fail -> {
+                        failLiveData.postValue(it.message)
+                    }
+                    is MainResponse.Error -> {
+                        errorLiveData.postValue(it.error.message)
+                    }
+                }
+            }
+        }
     }
 
     override fun back() {

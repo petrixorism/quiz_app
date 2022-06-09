@@ -28,11 +28,21 @@ class HistoryAdapter : ListAdapter<HistoryData, HistoryAdapter.ViewHolder>(MyDif
         @SuppressLint("SetTextI18n")
         fun bind() {
             getItem(absoluteAdapterPosition).apply {
-                val solution = String.format("%.2f", this.duration)
                 itemBinding.categoryTv.text = this.category
                 itemBinding.nameTv.text = this.name
+
+                val seconds = this.duration.toInt() / 1000
+
+                val duration = if (seconds < 60) {
+                    (seconds).toString() + " sek"
+                } else {
+                    "${(seconds / 60)} min ${(seconds) % 60} sek"
+                }
+
+                itemBinding.durationTv.text = duration
                 itemBinding.resultTv.text = this.result
-                itemBinding.durationTv.text = "$solution minut"
+
+
             }
         }
     }

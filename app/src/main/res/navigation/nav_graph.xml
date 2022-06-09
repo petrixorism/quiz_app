@@ -13,16 +13,15 @@
         <action
             android:id="@+id/action_homeFragment_to_testFragment"
             app:destination="@id/testFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_editFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTestFragment"
         android:name="uz.gita.quizapp.presentation.ui.AddTestFragment"
         android:label="AddTestFragment"
-        tools:layout="@layout/fragment_add_test">
-        <action
-            android:id="@+id/action_addTestFragment_to_editFragment"
-            app:destination="@id/editFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_add_test"/>
     <fragment
         android:id="@+id/historyFragment"
         android:name="uz.gita.quizapp.presentation.ui.HistoryFragment"

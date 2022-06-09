@@ -15,6 +15,8 @@ interface TestRepository {
 
     fun deleteTest(testData: TestData): Flow<MainResponse<Unit>>
 
+    fun deleteCategory(category: String): Flow<MainResponse<Unit>>
+
     fun insertTest(testData: TestData): Flow<MainResponse<Unit>>
 
 }

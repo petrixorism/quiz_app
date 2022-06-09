@@ -26,7 +26,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         super.onCreate(savedInstanceState)
 
         viewModel.historyListLiveData.observe(this) {
-            adapter.submitList(it)
+            adapter.submitList(it.sortedByDescending { it.time })
         }
         viewModel.failLiveData.observe(this) {
             showToast(it)

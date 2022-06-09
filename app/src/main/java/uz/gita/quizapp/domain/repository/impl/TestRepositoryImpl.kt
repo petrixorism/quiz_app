@@ -4,9 +4,7 @@ import com.google.firebase.firestore.DocumentReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
 import uz.gita.quizapp.data.model.CategoryData
 import uz.gita.quizapp.data.model.MainResponse
 import uz.gita.quizapp.data.model.TestData
@@ -17,7 +15,6 @@ import javax.inject.Inject
 class TestRepositoryImpl @Inject constructor(
     private val fireStore: DocumentReference
 ) : TestRepository {
-
 
 
     override fun getCategoryNames() = callbackFlow<MainResponse<List<CategoryData>>> {
@@ -74,16 +71,7 @@ class TestRepositoryImpl @Inject constructor(
             .collection(testData.category)
             .document(testData.id)
 
-        ref.update(
-            "id", testData.id,
-            "category", testData.category,
-            "question", testData.category,
-            "option1", testData.category,
-            "option2", testData.category,
-            "option3", testData.category,
-            "option4", testData.category,
-            "answer", testData.answer
-        ).addOnSuccessListener {
+        ref.set(testData).addOnSuccessListener {
             trySendBlocking(MainResponse.Success(Unit))
         }.addOnFailureListener {
             trySendBlocking(MainResponse.Fail(it.message.toString()))
@@ -109,6 +97,20 @@ class TestRepositoryImpl @Inject constructor(
             trySendBlocking(MainResponse.Fail(it.message.toString()))
         }
 
+        awaitClose { }
+    }.flowOn(Dispatchers.IO).catch {
+        emit(MainResponse.Error(it))
+    }
+
+    override fun deleteCategory(category: String) = callbackFlow<MainResponse<Unit>> {
+
+        fireStore.collection("categories").document(category)
+            .delete()
+            .addOnSuccessListener {
+                trySendBlocking(MainResponse.Success(Unit))
+            }.addOnFailureListener {
+                trySendBlocking(MainResponse.Fail(it.message!!))
+            }
         awaitClose { }
     }.flowOn(Dispatchers.IO).catch {
         emit(MainResponse.Error(it))

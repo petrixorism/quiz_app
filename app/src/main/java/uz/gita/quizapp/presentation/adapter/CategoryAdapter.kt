@@ -2,6 +2,7 @@ package uz.gita.quizapp.presentation.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,6 +13,7 @@ import uz.gita.quizapp.databinding.ItemCategoryBinding
 class CategoryAdapter : ListAdapter<CategoryData, CategoryAdapter.ViewHolder>(MyDiffUtil) {
 
     private var itemClick: ((CategoryData) -> Unit)? = null
+    private var itemLongClick: ((CategoryData, View) -> Unit)? = null
 
     inner class ViewHolder(private val itemBinding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
@@ -19,6 +21,11 @@ class CategoryAdapter : ListAdapter<CategoryData, CategoryAdapter.ViewHolder>(My
 
             itemBinding.root.setOnClickListener {
                 itemClick!!.invoke(getItem(absoluteAdapterPosition))
+            }
+
+            itemBinding.root.setOnLongClickListener {
+                itemLongClick!!.invoke(getItem(absoluteAdapterPosition), it)
+                true
             }
 
         }
@@ -59,6 +66,10 @@ class CategoryAdapter : ListAdapter<CategoryData, CategoryAdapter.ViewHolder>(My
 
     fun setItemClick(block: ((CategoryData) -> Unit)) {
         itemClick = block
+    }
+
+    fun setItemLongClick(block: ((CategoryData, View) -> Unit)) {
+        itemLongClick = block
     }
 
 }

@@ -12,12 +12,15 @@ interface TestEditViewModel {
     val backLiveData: LiveData<Unit>
     val editTestLiveData: LiveData<Unit>
     val deleteLiveData: LiveData<Unit>
+    val deleteCategoryLiveData: LiveData<Unit>
 
     fun getTestsByCategory(category: String)
 
     fun editTest(testData: TestData)
 
     fun deleteTest(testData: TestData)
+
+    fun deleteCategory(category: String)
 
     fun back()
 

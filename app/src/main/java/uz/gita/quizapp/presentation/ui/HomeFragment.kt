@@ -9,6 +9,7 @@ import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,7 +18,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.quizapp.R
 import uz.gita.quizapp.data.SharedPref
+import uz.gita.quizapp.data.model.CategoryData
 import uz.gita.quizapp.data.model.HistoryData
+import uz.gita.quizapp.data.model.TestData
 import uz.gita.quizapp.databinding.FragmentHistoryBinding
 import uz.gita.quizapp.databinding.FragmentHomeBinding
 import uz.gita.quizapp.presentation.adapter.CategoryAdapter
@@ -61,9 +64,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         adapter.setItemClick {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTestFragment(it.categoryName))
         }
+        adapter.setItemLongClick { data, view ->
+            showPopUp(view, data)
+        }
 
     }
 
+
+    // ---------- Dialog ----------//
     @SuppressLint("SetTextI18n")
     private fun showDialog() {
         val dialog = Dialog(requireContext())
@@ -79,12 +87,34 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 showToast("Ism kiritilmadi")
             } else {
                 viewModel.setUserName(nameEt.text.toString())
-                binding.textView2.text = "\uD83D\uDC4B\uD83C\uDFFB  Salom ${SharedPref.getInstance().name}"
+                binding.textView2.text =
+                    "\uD83D\uDC4B\uD83C\uDFFB  Salom ${SharedPref.getInstance().name}"
                 dialog.dismiss()
             }
         }
 
         dialog.show()
+    }
+
+    // ---------- PopUp ----------//
+    private fun showPopUp(view: View, data: CategoryData) {
+        val popup = PopupMenu(requireContext(), view)
+        popup.inflate(R.menu.item_menu)
+        popup.show()
+        popup.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.edit -> {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToEditFragment(
+                            data.categoryName
+                        )
+                    )
+                    return@setOnMenuItemClickListener true
+                }
+            }
+
+            return@setOnMenuItemClickListener false
+        }
     }
 
 }

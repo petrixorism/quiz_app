@@ -10,10 +10,13 @@ interface TestViewModel {
     val finishLiveData: LiveData<Unit>
     val failLiveData: LiveData<String>
     val errorLiveData: LiveData<String>
+    val backLiveData: LiveData<Unit>
 
     fun finishTest(historyData: HistoryData)
 
     fun getQuestions(category: String)
+
+    fun back()
 
 
 }
